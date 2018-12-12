@@ -1,0 +1,25 @@
+<div *ngFor="let comment of comments">
+  <div class="row">
+      <div class="col-sm-12 mb-3">
+        <div class="card card-body bg-light">
+          <div class="d-inline-block mb-3">
+              <p class="small d-inline">By {{comment.author.username}}, submitted {{comment.date.created | timeago:live}}</p>
+              <p *ngIf="comment.date.created !== comment.date.modified" class="small d-inline ml-1">* last edited ({{comment.date.modified | timeago:live}})</p>
+          </div>
+          <div class="mb-3" [innerHTML]="comment.content"></div>
+          <p>
+            <button class="btn btn-primary" type="button" data-toggle="collapse" [attr.data-target]="'#reply' + comment.id" aria-expanded="false" [attr.aria-controls]="'reply' + comment.id">Reply</button>
+            <button class="btn btn-primary ml-1" type="button" data-toggle="collapse" [attr.data-target]="'#update' + comment.id" aria-expanded="false" [attr.aria-controls]="'update' + comment.id">Edit</button>
+            <button *ngIf="comment.author.username === currentUser.username" type="button" class="btn btn-danger ml-1" (click)="delete(comment.id)">Delete</button>
+          </p>
+          <div class="collapse" [attr.id]="'reply' + comment.id">
+              <app-comment-form [id]="comment.id" [label]="'Reply'"></app-comment-form>
+          </div>
+          <div class="collapse" [attr.id]="'update' + comment.id">
+              <app-comment-form [id]="comment.id" [label]="'Edit'"></app-comment-form>
+          </div>
+          <app-comments [comments]="comment.comments" *ngIf="comment.comments"></app-comments>
+        </div>
+      </div>
+    </div>
+</div>

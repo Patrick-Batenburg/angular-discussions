@@ -1,0 +1,22 @@
+<div class="container">
+  <div class="d-inline-block">
+    <h1 class="d-inline">{{thread.title}}</h1>
+    <p class="small d-inline ml-2">Submitted {{thread.date.created | timeago:live}}</p>
+    <p *ngIf="thread.date.created !== thread.date.modified" class="small d-inline ml-1">* last edited ({{thread.date.modified | timeago:live}})</p>
+    <p class="small d-inline ml-1">by {{thread.author.username}}</p>
+  </div>
+  <div class="row">
+    <div class="col-sm-12 mb-3">
+      <div class="card card-body bg-light" [innerHTML]="thread.content"></div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12 mb-3">
+      <div class="card card-body bg-light">
+        <app-comment-form [id]="thread.id" [label]="'Comment'"></app-comment-form>
+      </div>
+    </div>
+  </div>
+
+  <app-comments [comments]="thread.comments" *ngIf="thread.comments"></app-comments>
+</div>

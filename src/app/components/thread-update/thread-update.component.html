@@ -1,0 +1,22 @@
+<div class="container">
+  <h1 class="text-center" [innerHTML]="'Update Thread: ' + thread.title"></h1>
+  <div class="row">
+    <div class="col-sm-12 my-4">
+      <div class="card card-body bg-light">
+        <form [formGroup]="threadForm" (ngSubmit)="onSubmit()">
+          <div class="form-group bg">
+            <label for="content">Content</label>
+            <app-ngx-editor [placeholder]="'Enter text here...'" [spellcheck]="true" formControlName="content" minHeight="128px" [required]="true" [ngClass]="{ 'is-invalid': submitted && form.content.errors }"></app-ngx-editor>
+            <div *ngIf="submitted && form.content.errors" class="invalid-feedback">
+              <div *ngIf="form.content.errors.required">Content is required</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <button class="btn btn-primary">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

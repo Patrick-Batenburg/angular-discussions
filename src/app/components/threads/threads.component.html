@@ -1,0 +1,29 @@
+<div class="container">
+  <h1 class="text-center mt-3">Recent Threads</h1>
+  <div *ngFor="let thread of threads">
+    <div class="row">
+      <div class="col-sm-12 mb-3">
+        <div class="card card-body bg-light">
+          <div class="d-inline-block mb-3">
+            <h5 class="card-title d-inline">{{thread.title}}</h5>
+            <p class="small d-inline ml-2">Submitted {{thread.date.created | timeago:live}}</p>
+            <p *ngIf="thread.date.created !== thread.date.modified" class="small d-inline ml-1">* last edited ({{thread.date.modified | timeago:live}})</p>
+            <p class="small d-inline ml-1">by {{thread.author.username}}</p>
+          </div>
+          <p>
+            <button class="btn btn-primary" type="button" data-toggle="collapse" [attr.data-target]="'#thread' + thread.id"
+              aria-expanded="false" [attr.aria-controls]="'thread' + thread.id">
+              Read More...
+            </button>
+            <button type="button" class="btn btn-primary ml-1" [routerLink]="['/thread/' + thread.id]">Comment</button>
+            <button *ngIf="thread.author.username === currentUser.username" type="button" class="btn btn-primary ml-1" [routerLink]="['/thread/update/' + thread.id]">Edit</button>
+            <button *ngIf="thread.author.username === currentUser.username" type="button" class="btn btn-danger ml-1" (click)="delete(thread.id)">Delete</button>
+          </p>
+          <div class="collapse" [attr.id]="'thread' + thread.id">
+            <div class="card card-body" [innerHTML]="thread.content"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

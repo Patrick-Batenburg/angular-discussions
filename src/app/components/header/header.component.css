@@ -1,0 +1,16 @@
+.jumbotron {
+    background: url(/assets/header-bg.png) no-repeat center top;
+    background-size:cover;
+    border-radius: 0;
+    margin-bottom:0;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    color: #fff;
+    font-weight: bold;
+  }
+  .cntr{text-align: center}

@@ -7,7 +7,8 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "postinstall": "ng build --aot -prod"
   },
   "private": true,
   "dependencies": {
@@ -56,6 +57,5 @@
   "engines": {
     "node": "10.14.0",
     "npm": "6.5.0"
-  },
-  "postinstall": "ng build --aot -prod"
+  }
 }
